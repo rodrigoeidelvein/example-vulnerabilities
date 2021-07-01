@@ -1,0 +1,31 @@
+{
+  "name": "example-vulnerabilities",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server",
+    "test": "tap --reporter=list --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigofazenda/example-vulnerabilities.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rodrigofazenda/example-vulnerabilities/issues"
+  },
+  "homepage": "https://github.com/rodrigofazenda/example-vulnerabilities#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.9",
+    "pino-pretty": "^5.1.0"
+  },
+  "dependencies": {
+    "fastify": "^3.18.1",
+    "fastify-cors": "^6.0.1",
+    "pg": "^8.6.0"
+  }
+}
