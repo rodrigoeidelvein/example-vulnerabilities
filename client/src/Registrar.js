@@ -4,7 +4,7 @@ import logo from "./logo.jpg";
 import { useNavigate, Link } from "@reach/router";
 import { getUser, setUser } from "./util";
 
-const Login = () => {
+const Registrar = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -35,20 +35,21 @@ const Login = () => {
         setErrorMessage("");
 
         try {
-            const { data } = await axios.post("http://localhost:5000/login", {
+            const { data } = await axios.post("http://localhost:5000/create", {
                 usuario: username,
                 senha: password,
+                tipo: "usuario"
             });
 
             if (data.message) {
                 setErrorMessage(data.message);
             }
 
-            if (data.usuario) {
-                const usuario = data.usuario[0];
+            if (data) {
+                const usuario = data[0];
                 setUser(usuario);
 
-                if (usuario.tipo === "admin") {
+                if (data.tipo === "admin") {
                     navigate("/dashboard", { replace: true });
                 } else {
                     navigate("/", { replace: true });
@@ -69,7 +70,7 @@ const Login = () => {
                     <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
                         <div className="px-5 py-7">
                             <div className="text-center py-2 font-bold">
-                                Login
+                                Registrar
                             </div>
                             <label className="font-semibold text-sm text-gray-600 pb-1 block">
                                 Usuário
@@ -93,7 +94,9 @@ const Login = () => {
                                 type="submit"
                                 className="transition duration-200 bg-blue-500 hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block"
                             >
-                                <span className="inline-block mr-2">Login</span>
+                                <span className="inline-block mr-2">
+                                    Registrar
+                                </span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -133,9 +136,9 @@ const Login = () => {
                                                 d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z"
                                             />
                                         </svg>
-                                        <Link to="/registrar">
+                                        <Link to="/login">
                                             <div className="inline-block ml-1 text-center">
-                                                Registrar
+                                                Login
                                             </div>
                                         </Link>
                                     </button>
@@ -149,4 +152,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Registrar;

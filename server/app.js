@@ -1,5 +1,6 @@
 const fastify = require("fastify");
 const db = require("./db");
+const path = require('path');
 
 function build(opts = {}) {
     const app = fastify(opts);
@@ -7,6 +8,10 @@ function build(opts = {}) {
     app.register(require("fastify-cors"), {
         origin: "*",
     });
+
+    app.register(require("fastify-static"), {
+        root: path.resolve(__dirname, "../client/build")
+    })
 
     app.post("/create", async (request, reply) => {
         const { usuario, senha, tipo } = request.body;
@@ -32,9 +37,8 @@ function build(opts = {}) {
         return { usuario: rows };
     });
 
-    app.get("/", async (request, reply) => {
-        const { rows } = await db.query("SELECT NOW()");
-        return { rows };
+    app.get('*', function(request, response) {
+        response.sendFile('index.html');
     });
 
     return app;

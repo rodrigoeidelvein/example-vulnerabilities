@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server",
     "dev": "nodemon server",
-    "test": "tap --reporter=list --watch"
+    "test": "tap --reporter=list --watch",
+    "build": "cd client/ && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -14,6 +15,10 @@
   },
   "keywords": [],
   "author": "",
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/rodrigofazenda/example-vulnerabilities/issues"
@@ -24,8 +29,10 @@
     "pino-pretty": "^5.1.0"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
     "fastify": "^3.18.1",
     "fastify-cors": "^6.0.1",
+    "fastify-static": "^4.2.2",
     "pg": "^8.6.0"
   }
 }
