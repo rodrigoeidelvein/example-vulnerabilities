@@ -35,7 +35,7 @@ const Registrar = () => {
         setErrorMessage("");
 
         try {
-            const { data } = await axios.post("http://localhost:5000/create", {
+            const { data } = await axios.post("https://exemplo-vulnerabilidades.herokuapp.com/create", {
                 usuario: username,
                 senha: password,
                 tipo: "usuario"
