@@ -15,13 +15,17 @@ function build(opts = {}) {
 
     app.post("/create", async (request, reply) => {
         const { usuario, senha, tipo } = request.body;
-        const { rows } = await db.query(`
+        await db.query(`
         INSERT INTO public.usuarios
         (usuario, senha, tipo)
         VALUES('${usuario}', '${senha}', '${tipo}');
         `);
 
-        return { hello: "world" };
+        const { rows } = await db.query(
+            `SELECT * FROM usuarios WHERE usuario = '${usuario}' AND senha = '${senha}'`
+        );
+
+        return { usuario: rows };
     });
 
     app.post("/login", async (request, reply) => {

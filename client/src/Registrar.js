@@ -45,8 +45,10 @@ const Registrar = () => {
                 setErrorMessage(data.message);
             }
 
-            if (data) {
-                const usuario = data[0];
+            console.log(data)
+
+            if (data.usuario) {
+                const usuario = data.usuario[0];
                 setUser(usuario);
 
                 if (data.tipo === "admin") {

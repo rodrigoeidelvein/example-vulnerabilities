@@ -1,10 +1,12 @@
 const server = require("./app")({
     logger: {
         level: 'info',
-        prettyPrint: true
     }
 });
 
-const PORT = process.env.PORT || 5000;
-
-server.listen(PORT, '0.0.0.0');
+server.listen(5000, (err, address) => {
+    if (err) {
+        console.log(err)
+        process.exit(1)
+    }
+})
